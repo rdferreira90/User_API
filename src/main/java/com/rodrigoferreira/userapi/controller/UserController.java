@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rodrigoferreira.userapi.dto.UserDTO;
@@ -57,6 +58,16 @@ public class UserController {
 	@GetMapping("/users")
 	public List<UserDTO> getUsers(){
 		return usuarios;
+	}
+	
+	@GetMapping("/users/{cpf}")
+	public UserDTO getUserFiltro(@PathVariable String cpf) {
+		for(UserDTO userFilter : usuarios) {
+			if(userFilter.getCpf().equals(cpf)) {
+				return userFilter;
+			}
+		}
+		return null;
 	}
 	
 }
